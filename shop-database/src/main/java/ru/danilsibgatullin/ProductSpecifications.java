@@ -1,6 +1,7 @@
-package ru.danilsibgatullin.models;
+package ru.danilsibgatullin;
 
 import org.springframework.data.jpa.domain.Specification;
+import ru.danilsibgatullin.models.Product;
 
 public  final class ProductSpecifications {
 

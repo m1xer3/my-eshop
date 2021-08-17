@@ -15,7 +15,7 @@ import ru.danilsibgatullin.interfaces.UserInterface;
 import ru.danilsibgatullin.interfaces.UserRepository;
 import ru.danilsibgatullin.models.User;
 import ru.danilsibgatullin.models.UserParams;
-import ru.danilsibgatullin.models.UserSpecifications;
+import ru.danilsibgatullin.UserSpecifications;
 
 
 import java.util.List;

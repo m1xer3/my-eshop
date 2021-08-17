@@ -10,7 +10,7 @@ import ru.danilsibgatullin.interfaces.ProductInterface;
 import ru.danilsibgatullin.interfaces.ProductRepository;
 import ru.danilsibgatullin.models.Product;
 import ru.danilsibgatullin.models.ProductParams;
-import ru.danilsibgatullin.models.ProductSpecifications;
+import ru.danilsibgatullin.ProductSpecifications;
 
 
 import java.util.List;

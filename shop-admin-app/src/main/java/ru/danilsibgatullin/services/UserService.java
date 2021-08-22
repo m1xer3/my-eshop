@@ -8,14 +8,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.danilsibgatullin.controllers.RoleDto;
-import ru.danilsibgatullin.controllers.UserDto;
+import ru.danilsibgatullin.dto.RoleDto;
+import ru.danilsibgatullin.dto.UserDto;
 import ru.danilsibgatullin.interfaces.RoleRepository;
 import ru.danilsibgatullin.interfaces.UserInterface;
 import ru.danilsibgatullin.interfaces.UserRepository;
 import ru.danilsibgatullin.models.User;
 import ru.danilsibgatullin.models.UserParams;
-import ru.danilsibgatullin.models.UserSpecifications;
+import ru.danilsibgatullin.UserSpecifications;
 
 
 import java.util.List;

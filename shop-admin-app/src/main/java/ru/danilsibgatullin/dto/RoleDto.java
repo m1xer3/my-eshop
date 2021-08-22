@@ -1,4 +1,4 @@
-package ru.danilsibgatullin.controllers;
+package ru.danilsibgatullin.dto;
 
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package ru.danilsibgatullin.interfaces;
 
 import org.springframework.data.domain.Page;
-import ru.danilsibgatullin.controllers.UserDto;
+import ru.danilsibgatullin.dto.UserDto;
 import ru.danilsibgatullin.models.UserParams;
 import java.util.List;
 import java.util.Optional;

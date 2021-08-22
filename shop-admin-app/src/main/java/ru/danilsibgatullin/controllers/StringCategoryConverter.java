@@ -2,14 +2,15 @@ package ru.danilsibgatullin.controllers;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+import ru.danilsibgatullin.dto.CategoryDto;
 import ru.danilsibgatullin.models.Category;
 
 @Component
-public class StringCategoryConverter implements Converter<String, Category> {
+public class StringCategoryConverter implements Converter<String, CategoryDto> {
 
     @Override
-    public Category convert(String s) {
+    public CategoryDto convert(String s) {
         String[] arr = s.split(";");
-        return new Category(Long.parseLong(arr[0]), arr[1]);
+        return new CategoryDto(Long.parseLong(arr[0]), arr[1]);
     }
 }

@@ -1,16 +1,20 @@
 package ru.danilsibgatullin.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.danilsibgatullin.interfaces.CateforyInterface;
+import ru.danilsibgatullin.dto.CategoryDto;
+import ru.danilsibgatullin.interfaces.CategoryInterface;
 import ru.danilsibgatullin.interfaces.CategoryRepository;
 import ru.danilsibgatullin.models.Category;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class CategoryService implements CateforyInterface {
+public class CategoryService implements CategoryInterface {
 
     private final CategoryRepository categoryRepository;
 
@@ -20,12 +24,15 @@ public class CategoryService implements CateforyInterface {
     }
 
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<CategoryDto> findAll(Integer page, Integer size, String sortField) {
+        return categoryRepository.findAll(PageRequest.of(page,size, Sort.by(sortField))).stream()
+                .map(category -> new CategoryDto(category.getId(), category.getCategoryName()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void save(Category category) {
+    public void save(CategoryDto categoryDto) {
+        Category category = new Category(categoryDto.getId(),categoryDto.getCategoryName());
         categoryRepository.save(category);
     }
 
@@ -35,7 +42,8 @@ public class CategoryService implements CateforyInterface {
     }
 
     @Override
-    public Optional<Category> findById(Long id) {
-        return categoryRepository.findById(id);
+    public Optional<CategoryDto> findById(Long id) {
+        return categoryRepository.findById(id).
+                map(category -> new CategoryDto(category.getId(),category.getCategoryName()));
     }
 }

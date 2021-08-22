@@ -1,4 +1,4 @@
-package ru.danilsibgatullin.shopbackendapiapp;
+package ru.danilsibgatullin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -6,65 +6,63 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.danilsibgatullin.dto.BrandDto;
 import ru.danilsibgatullin.dto.CategoryDto;
+import ru.danilsibgatullin.services.BrandService;
 import ru.danilsibgatullin.services.CategoryService;
 
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/brand")
+public class BrandController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-    private final CategoryService categoryService;
+    private final BrandService brandService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
     }
 
     @GetMapping
     public String listPage(@RequestParam("page") Optional<Integer> page,
                            @RequestParam("size") Optional<Integer> size,
                            @RequestParam("sortField") Optional<String> sortField, Model model){
-        model.addAttribute("categorys", categoryService.findAll(
+        model.addAttribute("brands", brandService.findAll(
                 page.orElse(1) - 1,
                 size.orElse(5),
                 sortField.filter(fld -> !fld.isBlank()).orElse("id")));
-        return "category";
+        return "brand";
     }
 
     @GetMapping("/new")
-    public String newCategoryForm(Model model){
-        model.addAttribute("category",new CategoryDto());
-        return "category_form";
+    public String newBrandForm(Model model){
+        model.addAttribute("brand",new BrandDto());
+        return "brand_form";
     }
 
     @PostMapping("/add")
-    public String update(CategoryDto category) {
-        if(category.getId()==null){
-            logger.info("Add product"+category);
-            categoryService.save(category);
+    public String update(BrandDto brandDto) {
+        if(brandDto.getId()==null){
+            logger.info("Add product"+brandDto);
+            brandService.save(brandDto);
         } else {
-            logger.info("Update product"+category);
-            categoryService.save(category);
+            logger.info("Update product"+brandDto);
+            brandService.save(brandDto);
         }
-        return "redirect:/category";
+        return "redirect:/brand";
     }
 
     @GetMapping("/{id}")
-    public String editCategory(@PathVariable("id") Long id,Model model){
-        model.addAttribute("category",categoryService.findById(id));
-        return "category_form";
+    public String editCategory(@PathVariable("id") Long id, Model model){
+        model.addAttribute("brand",brandService.findById(id));
+        return "brand_form";
     }
 
     @PostMapping("/del/{id}")
     public String deleteCategory(@PathVariable("id")Long id){
-        logger.info("Deleting category with id {}", id);
-
-        categoryService.deleteById(id);
-        return "redirect:/category";
+        brandService.deleteById(id);
+        return "redirect:/brand";
     }
-
-
 }

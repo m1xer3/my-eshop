@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ru.danilsibgatullin.dto.RoleDto;
+import ru.danilsibgatullin.dto.UserDto;
 import ru.danilsibgatullin.exceptions.NotFoundException;
 import ru.danilsibgatullin.interfaces.RoleRepository;
 import ru.danilsibgatullin.models.UserParams;

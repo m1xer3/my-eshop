@@ -46,6 +46,7 @@ public class SecurityConfiguration {
                     .antMatchers("/user/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                     .antMatchers("/category/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                     .antMatchers("/role/**").hasAnyRole("ADMIN","SUPER_ADMIN")
+                    .antMatchers("/brand/**").hasAnyRole("ADMIN","SUPER_ADMIN")
                     .antMatchers("/access_denied").authenticated()
                     .and()
                     .formLogin()

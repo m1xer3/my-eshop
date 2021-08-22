@@ -1,6 +1,7 @@
 package ru.danilsibgatullin.interfaces;
 
 import org.springframework.data.domain.Page;
+import ru.danilsibgatullin.dto.ProductDto;
 import ru.danilsibgatullin.models.Product;
 import ru.danilsibgatullin.models.ProductParams;
 
@@ -10,13 +11,11 @@ import java.util.Optional;
 
 public interface ProductInterface {
 
-    List<Product> findAll();
+    Page<ProductDto> findAll(Integer page, Integer size, String sortField);
 
-    Page<Product> findWithFilter(ProductParams productParams);
+    Optional<ProductDto> findById(Long id);
 
-    Optional<Product> findById(Long id);
-
-    void save(Product user);
+    void save(ProductDto product);
 
     void deleteById(Long id);
 }

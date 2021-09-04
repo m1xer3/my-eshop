@@ -1,20 +1,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div id="sidebar-left" class="span2" th:fragment="navigation">
-    <div class="nav-collapse sidebar-nav">
+    <div class="row align-items-start">
         <ul class="nav nav-tabs nav-stacked main-menu" >
-            <li>
+            <li class="col">
                 <a th:href="@{/user}">Users</a>
             </li>
-            <li>
+            <li class="col">>
                 <a th:href="@{/product}">Products</a>
             </li>
-            <li>
+            <li class="col">>
                 <a th:href="@{/category}">Categorys</a>
             </li>
-            <li>
+            <li class="col">>
                 <a th:href="@{/role}">Roles</a>
             </li>
-            <li>
+            <li class="col">>
                 <a th:href="@{/brand}">Brand</a>
             </li>
         </ul>

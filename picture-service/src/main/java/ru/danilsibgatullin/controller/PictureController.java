@@ -33,7 +33,7 @@ public class PictureController {
 
     @PostMapping("del/{id}")
     public String delPicture(@PathVariable("id")Long id,
-                             @RequestParam("productId") Optional<Long> productId){
+                             @RequestParam("productId") Optional<Long> productId) throws IOException {
         pictureService.deletePicture(id);
         return "redirect:/product/"+productId.get();
     }

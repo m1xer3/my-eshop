@@ -1,5 +1,6 @@
 package ru.danilsibgatullin.interfaces;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public interface PictureServiceInterface {
@@ -10,5 +11,5 @@ public interface PictureServiceInterface {
 
     String createPicture(byte[] picture);
 
-    void deletePicture(Long id);
+    void deletePicture(Long id) throws IOException;
 }

@@ -6,24 +6,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.danilsibgatullin.dto.BrandDto;
 import ru.danilsibgatullin.dto.CategoryDto;
 import ru.danilsibgatullin.dto.ProductDto;
 import ru.danilsibgatullin.exceptions.NotFoundException;
-import ru.danilsibgatullin.interfaces.BrandRepository;
-import ru.danilsibgatullin.interfaces.CategoryRepository;
-import ru.danilsibgatullin.interfaces.ProductInterface;
-import ru.danilsibgatullin.interfaces.ProductRepository;
-import ru.danilsibgatullin.models.Brand;
-import ru.danilsibgatullin.models.Category;
-import ru.danilsibgatullin.models.Product;
-import ru.danilsibgatullin.models.ProductParams;
+import ru.danilsibgatullin.interfaces.*;
+import ru.danilsibgatullin.models.*;
 import ru.danilsibgatullin.ProductSpecifications;
 
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements ProductInterface {
@@ -34,13 +31,17 @@ public class ProductService implements ProductInterface {
 
     private final BrandRepository brandRepository;
 
+    private final  PictureServiceInterface pictureService;
+
     @Autowired
     public ProductService(ProductRepository productRepository,
                           CategoryRepository categoryRepository,
-                          BrandRepository brandRepository) {
+                          BrandRepository brandRepository,
+                          PictureServiceInterface pictureService) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.brandRepository  = brandRepository;
+        this.pictureService=pictureService;
     }
 
     @Override
@@ -51,7 +52,8 @@ public class ProductService implements ProductInterface {
                         product.getDescription(),
                         product.getCost(),
                         new CategoryDto(product.getCategory().getId(), product.getCategory().getCategoryName()),
-                        new BrandDto(product.getBrand().getId(),product.getBrand().getBrandName()))
+                        new BrandDto(product.getBrand().getId(),product.getBrand().getBrandName()),
+                        product.getPictures().stream().map(picture ->picture.getId()).collect(Collectors.toList()))
                 );
     }
 
@@ -63,7 +65,8 @@ public class ProductService implements ProductInterface {
                         product.getDescription(),
                         product.getCost(),
                         new CategoryDto(product.getCategory().getId(), product.getCategory().getCategoryName()),
-                        new BrandDto(product.getBrand().getId(),product.getBrand().getBrandName())));
+                        new BrandDto(product.getBrand().getId(),product.getBrand().getBrandName()),
+                        product.getPictures().stream().map(picture ->picture.getId()).collect(Collectors.toList())));
     }
 
     @Override
@@ -82,6 +85,21 @@ public class ProductService implements ProductInterface {
         product.setDescription(productDto.getDescription());
         product.setCategory(category);
         product.setBrand(brand);
+
+        if (productDto.getNewPictures() != null) {
+            for (MultipartFile newPicture : productDto.getNewPictures()) {
+                try {
+                    product.getPictures().add(new Picture(null,
+                            newPicture.getOriginalFilename(),
+                            newPicture.getContentType(),
+                            pictureService.createPicture(newPicture.getBytes()),
+                            product
+                    ));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
 
         productRepository.save(product);
     }

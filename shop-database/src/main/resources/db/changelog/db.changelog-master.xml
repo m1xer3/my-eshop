@@ -43,5 +43,17 @@
         <tagDatabase tag="V-5.0"/>
     </changeSet>
 
+    <include file="v-6.0/m1xer.changelog.v-60.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="5000" author="danil_sibgatullin">
+        <tagDatabase tag="V-5.0"/>
+    </changeSet>
+
+    <include file="v-7.0/m1xer.changelog.v-70.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="7000" author="danil_sibgatullin">
+        <tagDatabase tag="V-7.0"/>
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -1,0 +1,22 @@
+.backgound-nav {
+  background-color: slategrey;
+  font-size: large;
+  position: sticky;
+  top: 0;
+  margin-bottom: 5px;
+  z-index: 1;
+};
+
+.button-color-nav{
+  background-color: dimgrey;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.dropdown-menu-hover :hover {
+  display: block;
+  pointer-events: auto;
+}
+
+
+

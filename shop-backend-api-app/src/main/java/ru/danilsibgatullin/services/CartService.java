@@ -21,23 +21,22 @@ public class CartService implements CartInterface{
     @Override
     public void addProductQty(ProductDto productDto, String color, String material, int qty) {
         LineItem lineItem = new LineItem(productDto,color,material);
-        lineItems.put(lineItem,lineItems.getOrDefault(lineItem.getQty(),0)+qty);
+        lineItems.put(lineItem,lineItems.getOrDefault(lineItem,0)+qty);
 
     }
 
     @Override
-    public void removeProductQty(ProductDto productDto, String color, String material, int qty) {
-        LineItem lineItem = new LineItem(productDto,color,material);
-        if(lineItems.get(lineItem)-qty>0){
-            lineItems.replace(lineItem,lineItems.get(lineItem)-qty);
+    public void removeProductQty(LineItem lineItem,Integer qty) {
+        if(qty>0){
+            lineItems.replace(lineItem,qty);
+            lineItems.forEach(LineItem::setQty);
         }else{
-            removeProduct(productDto,color,material);
+            removeProduct(lineItem);
         }
     }
 
     @Override
-    public void removeProduct(ProductDto productDto, String color, String material) {
-        LineItem lineItem = new LineItem(productDto,color,material);
+    public void removeProduct(LineItem lineItem) {
         lineItems.remove(lineItem);
     }
 

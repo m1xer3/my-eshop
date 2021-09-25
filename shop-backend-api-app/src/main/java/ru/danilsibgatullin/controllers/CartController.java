@@ -44,5 +44,15 @@ public class CartController {
         return new AllCartDto(cartService.getLineItems(), cartService.getSubTotal());
     }
 
+    @PostMapping("/delete")
+    public void removeFromCart(@RequestBody LineItem lineItem){
+        cartService.removeProduct(lineItem);
+    }
+
+    @PostMapping("/decries")
+    public void decriesQty(@RequestBody LineItem lineItem){
+        System.out.println("decries");
+        cartService.removeProductQty(lineItem, lineItem.getQty());
+    }
 
 }

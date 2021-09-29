@@ -3,6 +3,8 @@ import {AllCartDto} from "../../models/all-cart-dto";
 import {CartService} from "../../services/cart.service";
 import {LineItem} from "../../models/line-item";
 
+export const CART_URL="cart"
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',

@@ -50,9 +50,9 @@
                                placeholder="Upload new product picture" multiple>
                     </div>
 
-                    <select multiple class="form-control" id="mainpicture" th:field="*{mainPicture}" required>
+                    <select th:if="${pictures}!=null" multiple class="form-control" id="mainpicture" th:field="*{mainPicture}" required>
                     <option th:each="pictureId : ${pictures}"
-                            th:text="${pictureId}"
+                            th:text="${pictureId}"ng
                             th:value="${pictureId}"></option>
                     </select>
 

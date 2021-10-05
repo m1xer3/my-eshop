@@ -3,6 +3,8 @@ import {Product} from "../../models/product";
 import {ProductService} from "../../services/product.service";
 import {DOCUMENT} from "@angular/common";
 import {PictureService} from "../../services/picture.service";
+import {AddLineItemDto} from "../../models/add-line-item-dto";
+import {CartService} from "../../services/cart.service";
 
 
 @Component({
@@ -17,38 +19,12 @@ export class ProductComponent implements OnInit {
 
   constructor(private productService: ProductService,
               @Inject(DOCUMENT) private document: Document,
-              private pictureService: PictureService) { }
+              private pictureService: PictureService,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
     this.retrieveProducts();
-
-    // this.loadScript('shop-frontend-app/src/scripts/simple-adaptive-slider.js').then(
-    //   () => this.loadTextScript(`
-    //       setTimeout(() => {
-    //         $( "#promise-based" ).html( "PromiseBasedComponent..." )
-    //       }, 2000);
-    //   `)
-    // );
   }
-
-  // loadTextScript(text: string) {
-  //   return new Promise<void>(resolve => {
-  //     const script = this.renderer2.createElement('script');
-  //     script.text = text;
-  //     this.renderer2.appendChild(this.document.body, script);
-  //     resolve();
-  //   });
-  // }
-  //
-  // loadScript(url: string) {
-  //   return new Promise((resolve, reject) => {
-  //     const script = this.renderer2.createElement('script');
-  //     script.src = url;
-  //     script.onload = resolve;
-  //     script.onerror = reject;
-  //     this.renderer2.appendChild(this.document.body, script);
-  //   });
-  // }
 
   private retrieveProducts() {
     this.productService.findAll()
@@ -61,15 +37,15 @@ export class ProductComponent implements OnInit {
       })
   }
 
-  public getPictures(product: Product){
-    if (product.pictures!=null){
+  public getPictures(product: Product) {
+    if (product.pictures != null) {
       var id = product.pictures[0];
       this.pictureService.getPicture(id);
     }
-
   }
 
-
-
-
+  addToCart(id: number) {
+      this.cartService.addToCart(new AddLineItemDto(id, 1, "", ""))
+        .subscribe();
+  }
 }

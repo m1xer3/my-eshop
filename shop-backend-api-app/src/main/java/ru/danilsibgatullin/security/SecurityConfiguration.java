@@ -18,12 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityConfiguration {
 
     @Autowired
-    public void authConfigure(AuthenticationManagerBuilder auth,
-                              PasswordEncoder passwordEncoder) throws Exception {
+    public void authConfig(AuthenticationManagerBuilder auth,
+                           PasswordEncoder passwordEncoder,
+                           UserAuthService userAuthService) throws Exception {
+        //in memory provaider
         auth.inMemoryAuthentication()
                 .withUser("mem_user")
-                .password(passwordEncoder.encode("password"))
-                .roles("ADMIN", "SUPER_ADMIN");
+                .password(passwordEncoder.encode("mem_user")) //шифрование пароля в оперативной памяти
+                .roles("SUPER_ADMIN")
+                .and()
+                .withUser("mem_gest")
+                .password(passwordEncoder.encode("mem_gest"))
+                .roles("GUEST");
+
+        auth.userDetailsService(userAuthService);
     }
 
     @Configuration
@@ -61,4 +69,3 @@ public class SecurityConfiguration {
         }
     }
 }
-

@@ -2,7 +2,7 @@ export class Order {
 
   constructor(public id:number,
               public price:number,
-              public orderDate:string,
-              public status:string) {
+              public status:string,
+              public date:string,) {
   }
 }

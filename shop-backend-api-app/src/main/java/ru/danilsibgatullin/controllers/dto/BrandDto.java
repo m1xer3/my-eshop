@@ -1,8 +1,10 @@
 package ru.danilsibgatullin.controllers.dto;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 
 @Data
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 public class BrandDto {
     private Long id;
 

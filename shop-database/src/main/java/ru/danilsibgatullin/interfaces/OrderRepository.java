@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Long> {
 
-    List<Order> getOrderByUser(String username);
-
+    @Query("select o "+
+            "from Order o " +
+            "inner join o.user u " +
+            "where u.username = :username "+
+            "group by o.id")
+    List<Order> findAllByUsername(String username);
 }

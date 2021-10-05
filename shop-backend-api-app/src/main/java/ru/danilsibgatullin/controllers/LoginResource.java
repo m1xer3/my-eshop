@@ -12,7 +12,6 @@ public class LoginResource {
 
     @GetMapping("/login")
     public User login(Authentication auth) {
-
         return (User) auth.getPrincipal();
     }
 }

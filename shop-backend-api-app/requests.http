@@ -3,3 +3,8 @@ GET http://localhost:8081/api/v1/product/all
 GET http://localhost:8081/api/v1/category/all
 ###
 GET http://localhost:8081/api/v1/cart/all
+###
+GET http://localhost:8081/api/v1/login
+###
+GET http://localhost:8081/api/v1/order/all
+Authorization: Basic bill qwerty

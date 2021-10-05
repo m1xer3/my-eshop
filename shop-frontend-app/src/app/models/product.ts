@@ -6,7 +6,7 @@ export class Product {
   constructor(public id: number,
               public title: string,
               public description: string,
-              public cost: number,
+              public price: number,
               public category: Category,
               public brand: Brand,
               public pictures: number[],

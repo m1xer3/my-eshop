@@ -29,4 +29,8 @@ export class CartService {
   public decriseQty(dto: LineItem){
     return this.http.post('/api/v1/cart/decries',dto);
   }
+
+  public clearCart(){
+    return this.http.post('/api/v1/cart/deleteAll',null)
+  }
 }

@@ -61,5 +61,28 @@
         <tagDatabase tag="V-8.0"/>
     </changeSet>
 
+    <include file="v-9.0/m1xer.changelog.v-90.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="9000" author="danil_sibgatullin">
+        <tagDatabase tag="V-9.0"/>
+    </changeSet>
+
+    <include file="v-10.0/m1xer.changelog.v-100.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="10000" author="danil_sibgatullin">
+        <tagDatabase tag="V-10.0"/>
+    </changeSet>
+
+    <include file="v-11.0/m1xer.changelog.v-110.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="11000" author="danil_sibgatullin">
+        <tagDatabase tag="V-11.0"/>
+    </changeSet>
+
+    <include file="v-12.0/m1xer.changelog.v-120.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="12000" author="danil_sibgatullin">
+        <tagDatabase tag="V-12.0"/>
+    </changeSet>
 
 </databaseChangeLog>

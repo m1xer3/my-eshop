@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {AllCartDto} from "../../models/all-cart-dto";
 import {CartService} from "../../services/cart.service";
 import {LineItem} from "../../models/line-item";
+import {OrderService} from "../../services/order.service";
+import {tokenReference} from "@angular/compiler";
+
+export const CART_URL="cart"
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +16,8 @@ export class CartComponent implements OnInit {
 
   content?: AllCartDto;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private orderService: OrderService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +41,12 @@ export class CartComponent implements OnInit {
     alert(lineItem.qty);
     this.cartService.decriseQty(lineItem).subscribe();
     window.location.reload();
+  }
+
+  createOrder(): void{
+    this.orderService.createOrder().subscribe();
+      this.cartService.clearCart();
+      window.location.reload();
   }
 
 

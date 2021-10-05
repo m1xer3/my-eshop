@@ -6,6 +6,7 @@ import {PictureService} from "../../services/picture.service";
 import {AddLineItemDto} from "../../models/add-line-item-dto";
 import {CartService} from "../../services/cart.service";
 
+export const PRODUCT_URL = 'product';
 
 @Component({
   selector: 'app-product',

@@ -41,6 +41,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Picture> pictures = new ArrayList<>();
 
+    @Column(name = "main_picture_id")
+    private Long mainPicture;
+
 
     public Product(String title, BigDecimal cost, Category category) {
         this.title = title;
@@ -54,6 +57,15 @@ public class Product {
         this.category=category;
         this.brand=brand;
     }
+
+    public Product(String title, BigDecimal cost, Category category,Brand brand,Long mainPicture) {
+        this.title = title;
+        this.cost = cost;
+        this.category=category;
+        this.brand=brand;
+        this.mainPicture=mainPicture;
+    }
+
 
     public Product() {
     }

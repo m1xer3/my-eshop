@@ -55,5 +55,11 @@
         <tagDatabase tag="V-7.0"/>
     </changeSet>
 
+    <include file="v-8.0/m1xer.changelog.v-80.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="8000" author="danil_sibgatullin">
+        <tagDatabase tag="V-8.0"/>
+    </changeSet>
+
 
 </databaseChangeLog>

@@ -1,14 +1,12 @@
-package ru.danilsibgatullin.dto;
+package ru.danilsibgatullin.controllers.dto;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
 public class ProductDto {
-
     private Long id;
 
     private String title;
@@ -22,8 +20,6 @@ public class ProductDto {
     private BrandDto brand;
 
     private List<Long> pictures;
-
-    private MultipartFile[] newPictures;
 
     private Long mainPicture;
 

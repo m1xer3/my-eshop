@@ -2,9 +2,13 @@ package ru.danilsibgatullin.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import ru.danilsibgatullin.controllers.dto.OrderDto;
+import ru.danilsibgatullin.controllers.dto.OrderMessage;
 import ru.danilsibgatullin.interfaces.OrderRepository;
 import ru.danilsibgatullin.interfaces.ProductRepository;
 import ru.danilsibgatullin.interfaces.UserRepository;
@@ -32,15 +36,20 @@ public class OrderService implements OrderInterface{
 
     private final ProductRepository productRepository;
 
+    private final RabbitTemplate rabbitTemplate;
+
+
     @Autowired
     public OrderService(OrderRepository orderRepository,
                         CartService cartService,
                         UserRepository userRepository,
-                        ProductRepository productRepository) {
+                        ProductRepository productRepository,
+                        RabbitTemplate rabbitTemplate) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public List<OrderDto> findOrdersByUsername(String username) {
@@ -92,6 +101,7 @@ public class OrderService implements OrderInterface{
         order.setTotalPrice(orderLineItems.stream()
                 .map(orderLineItem -> orderLineItem.getProduct().getCost())
                 .reduce((x,y)->x.add(y)).get());
+        rabbitTemplate.convertAndSend("order.exchange", "new_order", new OrderMessage(order.getId(), order.getStatus().name()));
 
 
         orderRepository.save(order);
@@ -101,4 +111,5 @@ public class OrderService implements OrderInterface{
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No product with id"));
     }
+
 }
